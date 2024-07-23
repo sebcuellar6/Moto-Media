@@ -18,6 +18,10 @@
 * ![Trello](https://trello.com/b/5mkKx6o9/moto-media)
   
 ## Technologies:
+
+## <u>New Technologies:<u>
+#### <u>Authorization, Levenshtein<>
+
 ## <u>Frontend:<u> 
 #### React, Bootstrap, Axios, Flexbox, Grid, Html5, Vite
 
