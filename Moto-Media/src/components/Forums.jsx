@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Card from 'react-bootstrap/Card'
 
 export default function Forums () {
 
@@ -83,6 +84,30 @@ export default function Forums () {
           </Container>
         </Navbar>
       ))}
+      <Container className='post-cards'>
+        {forums.map((forum) => (
+      <Card key={forum.id}>
+      <Card.Header as="h5">{forum.username}</Card.Header>
+      <Card.Body>
+        <Card.Title>{forum.title}</Card.Title>
+        <Card.Text>
+         {forum.body}
+        </Card.Text>
+        {forum.comments.map((comment) => (
+          <Card key={comment.id}>
+          <Card.Header as="h5">{comment.username}</Card.Header>
+          <Card.Body>
+          <Card.Text>
+             {forum.body}
+            </Card.Text>
+            <Card.Title>{comment.image}</Card.Title>
+          </Card.Body>
+        </Card>
+        ))}
+      </Card.Body>
+    </Card>
+    ))}
+      </Container>
     </div> 
   )
   
