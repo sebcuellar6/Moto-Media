@@ -2,9 +2,12 @@ import '../App.css'
 import Carousel from 'react-bootstrap/Carousel';
 import HomeMoto from '../photos/HomeMoto.drawio.png'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card'
+
 
 
 export default function Home () {
@@ -28,8 +31,7 @@ export default function Home () {
 
   return(
     <div className='heroPage'>
-      <h1 style={{fontSize: '40px'}}><u>Home</u></h1>
-      <Carousel>
+      <Carousel className='home-carousel' style={{paddingBottom: '10px'}}>
         <Carousel.Item>
           <img
             style={{ width: '600px', height: '500px' }}
@@ -67,24 +69,25 @@ export default function Home () {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <Container className='home-card'>
-        {forums.map((forum) => (
-
-          <Card border="primary" style={{ width: '18rem' }} key={forum.id}>
-          <Card.Header>{forum.username}</Card.Header>
-          <Card.Body>
-            <Card.Title>{forum.title}</Card.Title>
-            <Card.Text>
-              {forum.body}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-
-        ))}
-
+      <Container className='home-card' style={{paddingTop: '30px'}}>
+        <Row><h1 style={{textAlign: 'left', paddingBottom: '20px'}}>Latest posts...</h1></Row>
+        <Row>
+          {forums.map((forum) => (
+            <Col xs={12} md={6} lg={4} key={forum.id} className="d-flex align-items-stretch">
+              <Card border="primary" style={{ width: '25rem', margin: '0' }}>
+                <Card.Header>{forum.title}</Card.Header>
+                <Card.Body>
+                  <Card.Title>{forum.username}</Card.Title>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </Container>
-      
-    </div> 
+    </div>
   )
-  
 }

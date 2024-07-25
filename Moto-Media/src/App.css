@@ -3,3 +3,7 @@
   margin-top: 25px;
   font-size: 30px;
 }
+
+.home-carousel img {
+  border-radius: 15px;
+}
