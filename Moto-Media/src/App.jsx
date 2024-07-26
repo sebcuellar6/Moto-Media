@@ -11,6 +11,8 @@ import Forums from './components/Forums.jsx'
 import MeetUps from './components/MeetUps.jsx'
 import Messages from './components/Messages.jsx'
 import Carousel from 'react-bootstrap/Carousel';
+import ForumDetails from './components/ForumDetails.jsx'
+import PostForum from './components/PostForum.jsx'
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/forums' element={<Forums/>} />
+      <Route path='/forum-details/:id' element={<ForumDetails/>} />
+      <Route path='/forum-post' element={<PostForum />} />
       <Route path='/meetups' element={<MeetUps/>} />
       <Route path='/messages' element={<Messages/>} />
     </Routes>

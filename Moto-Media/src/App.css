@@ -4,6 +4,22 @@
   font-size: 30px;
 }
 
-.home-carousel img {
+.home-carousel img{
   border-radius: 15px;
+}
+
+.forum-post {
+  margin: 15px;
+}
+
+.post-links {
+  margin: 20px;
+}
+
+.post-category {
+  margin: 20px;
+}
+
+.post-tags {
+  margin-bottom: 20px;
 }
