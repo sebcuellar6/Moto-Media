@@ -13,6 +13,7 @@ import Messages from './components/Messages.jsx'
 import Carousel from 'react-bootstrap/Carousel';
 import ForumDetails from './components/ForumDetails.jsx'
 import PostForum from './components/PostForum.jsx'
+import Login from './components/LoginJWT.jsx'
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
     <MainNavBar/>
     <Routes>
       <Route path='/' element={<Home/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='#profile' element={<Profile/>} />
       <Route path='/forums' element={<Forums/>} />
       <Route path='/forum-details/:id' element={<ForumDetails/>} />
       <Route path='/forum-post' element={<PostForum />} />

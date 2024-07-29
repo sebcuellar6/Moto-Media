@@ -7,6 +7,9 @@ import Col from 'react-bootstrap/Col'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card'
+import { login, refreshToken } from './Login';
+import Login from './LoginJWT';
+import Profile from './Profile';
 
 
 
@@ -70,6 +73,8 @@ export default function Home () {
         </Carousel.Item>
       </Carousel>
       <Container className='home-card' style={{paddingTop: '30px'}}>
+        <Login/>
+        <Profile/>
         <Row><h1 style={{textAlign: 'left', paddingBottom: '20px'}}>Latest posts...</h1></Row>
         <Row>
           {forums.map((forum) => (

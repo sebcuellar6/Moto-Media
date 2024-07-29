@@ -11,6 +11,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 function MainNavBar() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
+  // Display username or email, if available
+  const userName = user?.nickname || user?.name || user?.email || 'User';
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -24,7 +27,7 @@ function MainNavBar() {
         </Nav>
         {!isLoading && isAuthenticated && (
           <Navbar.Text>
-            Signed in as: <a href="#login">{user.nickname || user.name}</a>
+            Signed in as: <a href="#profile">{userName}</a>
           </Navbar.Text>
         )}
       </Container>
@@ -33,4 +36,5 @@ function MainNavBar() {
 }
 
 export default MainNavBar;
+
 
