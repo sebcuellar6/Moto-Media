@@ -28,7 +28,11 @@ export default function Home() {
         const response = await axios.get('http://localhost:8000/forumposts/');
         const meetResponse = await axios.get('http://localhost:8000/meetups/');
         console.log(response.data);
-        setForums(response.data);
+
+        // Sort forums by created_at in ascending order
+        const sortedForums = response.data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
+        setForums(sortedForums);
         setMeets(meetResponse.data);
       } catch (error) {
         console.log(error);
@@ -41,7 +45,7 @@ export default function Home() {
     <div className='heroPage'>
       <Carousel className='home-carousel' style={{ paddingBottom: '10px' }}>
         {meets.map((meet) => (
-          <Carousel.Item key={meet.id} onClick={handleMeetClick(meet.id)}> {/* Add a key prop here */}
+          <Carousel.Item key={meet.id} onClick={() => handleMeetClick(meet.id)}> 
             <img
               style={{ width: '600px', height: '500px' }}
               className='d-block w-100'
