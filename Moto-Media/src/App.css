@@ -27,3 +27,24 @@
 .meet-cards {
   margin-bottom: 30px;
 }
+
+.home-col {
+  margin-bottom: 40px;
+}
+
+.home-body {
+  max-height: 180px; /* Adjust this value as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Number of lines to show before truncating */
+  -webkit-box-orient: vertical;
+}
+
+.home-header {
+  font-weight: bold;
+}
+
+.home-card-title {
+  font-size: 1.2rem;
+}
