@@ -14,6 +14,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import ForumDetails from './components/ForumDetails.jsx'
 import PostForum from './components/PostForum.jsx'
 import Login from './components/LoginJWT.jsx'
+import PostMeetUps from './components/PostMeetUps.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       <Route path='/forum-details/:id' element={<ForumDetails/>} />
       <Route path='/forum-post' element={<PostForum />} />
       <Route path='/meetups' element={<MeetUps/>} />
+      <Route path='/meetups-post' element={<PostMeetUps/>} />
       <Route path='/messages' element={<Messages/>} />
     </Routes>
     </>

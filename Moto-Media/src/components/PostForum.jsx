@@ -15,30 +15,38 @@ export default function Forums() {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [body, setBody] = useState('');
-  const [images, setImages] = useState('');
+  const [images, setImages] = useState(null);
   const [links, setLinks] = useState('');
   const [category, setCategory] = useState('');
-  const [profile, setProfile] = useState('');
+  const [profile_id, setProfile_id] = useState('');
   const [choice1, setChoice1] = useState('');
   const [choice2, setChoice2] = useState('');
 
   const handlePost = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('tags', tags);
+    formData.append('body', body);
+    if (images) formData.append('images', images);
+    formData.append('links', links);
+    formData.append('category', category);
+    formData.append('profile_id', profile_id);
+    formData.append('first_choice', choice1);
+    formData.append('second_choice', choice2);
+
+    console.log('Posting data:', formData);
+
     try {
-      await axios.post('http://localhost:8000/forumposts/', {
-        title: title,
-        tags: tags,
-        body: body,
-        images: images,
-        links: links,
-        category: category,
-        profile: profile,
-        first_choice: choice1,
-        second_choice: choice2,
+      const response = await axios.post('http://localhost:8000/forumposts/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+      console.log('Response:', response);
     } catch (error) {
-      console.log(error);
+      console.error('Error:', error.response ? error.response.data : error.message);
     }
   };
 
@@ -94,6 +102,14 @@ export default function Forums() {
               <Form.Control type="text" placeholder="Enter Links" value={links} onChange={(e) => setLinks(e.target.value)} />
             </Col>
           </Row>
+          <Row className='post-links'>
+            <Form.Label column lg={2}>
+              Profile ID
+            </Form.Label>
+            <Col>
+              <Form.Control type="text" placeholder="Enter ID" value={profile_id} onChange={(e) => setProfile_id(e.target.value)} />
+            </Col>
+          </Row>
           <Row className='post-tags'>
             <Form.Label column lg={2}>
               Tags
@@ -125,4 +141,5 @@ export default function Forums() {
     </div>
   );
 }
+
 
