@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap'; // Corrected import
+import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap'; // Corrected import
 import ForumNav from './ForumNav';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -21,6 +21,7 @@ export default function Forums() {
   const [profile_id, setProfile_id] = useState('');
   const [choice1, setChoice1] = useState('');
   const [choice2, setChoice2] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handlePost = async (e) => {
     e.preventDefault();
@@ -39,12 +40,12 @@ export default function Forums() {
     console.log('Posting data:', formData);
 
     try {
-      const response = await axios.post('http://localhost:8000/forumposts/', formData, {
+      await axios.post('http://localhost:8000/forumposts/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Response:', response);
+      setShowModal(true);  // Show modal upon successful post
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
     }
@@ -65,6 +66,11 @@ export default function Forums() {
   }, []);
 
   const handleForumClick = (id) => navigate(`/forum-details/${id}`);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate('/forums');  // Navigate to forums page after closing modal
+  };
 
   return (
     <div className='forumPage'>
@@ -138,8 +144,22 @@ export default function Forums() {
           <Button as="input" type="submit" value="Submit" />{' '}
         </Form>
       </Container>
+
+      {/* Modal for success */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Your forum post has been created successfully.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Go to Forums
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
+
 
 
