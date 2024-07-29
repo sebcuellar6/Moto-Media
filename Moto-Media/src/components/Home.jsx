@@ -41,7 +41,7 @@ export default function Home() {
     <div className='heroPage'>
       <Carousel className='home-carousel' style={{ paddingBottom: '10px' }}>
         {meets.map((meet) => (
-          <Carousel.Item key={meet.id} onClick={handleMeetClick}> {/* Add a key prop here */}
+          <Carousel.Item key={meet.id} onClick={handleMeetClick(meet.id)}> {/* Add a key prop here */}
             <img
               style={{ width: '600px', height: '500px' }}
               className='d-block w-100'

@@ -20,7 +20,7 @@ export default function MeetUpDetails() {
       try {
         const response = await axios.get(`http://localhost:8000/meetups/${id}`);
         const categoryResponse = await axios.get('http://localhost:8000/categories/');
-        setForum(response.data);
+        setMeet(response.data);
         setCategories(categoryResponse.data);
       } catch (error) {
         console.log(error);
@@ -42,8 +42,11 @@ export default function MeetUpDetails() {
           <Card.Header as="h5">{meet.name}</Card.Header>
           <Card.Body>
             <Card.Title>{meet.title}</Card.Title>
-            <Card.Text>{meet.description}</Card.Text>
             <img className='meet-image' src={meet.main_image} alt="Forum" />
+            <Card.Text><u>Open or Invite:</u> {meet.invite_only === true ? 'Invite Only' : 'Open to all'}</Card.Text>
+            <Card.Text><u>Skill Level:</u> {meet.skill_level}</Card.Text>
+            <Card.Text><u>Location:</u> {meet.location}</Card.Text>
+            <Card.Text><u>Description:</u> {meet.description}</Card.Text>
           </Card.Body>
         </Card>
       </Container>
