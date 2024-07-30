@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 export default function Home() {
   const [forums, setForums] = useState([]);
   const [meets, setMeets] = useState([]);
+ 
+
   let navigate = useNavigate();
 
   const handleForumClick = (id) => {
@@ -41,11 +43,12 @@ export default function Home() {
     getData();
   }, []);
 
+
   return (
     <div className='heroPage'>
       <Carousel className='home-carousel' style={{ paddingBottom: '10px' }}>
         {meets.map((meet) => (
-          <Carousel.Item key={meet.id} onClick={() => handleMeetClick(meet.id)}> 
+          <Carousel.Item className='carousel-item' key={meet.id} onClick={() => handleMeetClick(meet.id)}> 
             <img
               style={{ width: '600px', height: '500px' }}
               className='d-block w-100'

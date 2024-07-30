@@ -35,12 +35,17 @@ export default function Forums() {
   const handleForumDelete = async (id, event) => {
     event.stopPropagation(); // Prevents the Card onClick from firing
     try {
-      await axios.delete(`http://localhost:8000/forumposts/${id}`);
+      await axios.delete(`http://localhost:8000/forums/${id}`);
       setForums(forums.filter((forum) => forum.id !== id));
       setFilteredForums(filteredForums.filter((forum) => forum.id !== id));
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleForumEdit = (id, event) => {
+    event.stopPropagation(); // Prevents the Card onClick from firing
+    navigate(`/update-forum/${id}`);
   };
 
   const handleSearch = (query) => {
@@ -66,6 +71,7 @@ export default function Forums() {
               <Card.Title>{forum.title}</Card.Title>
               <Card.Text>{forum.body}</Card.Text>
               <Button variant="danger" onClick={(event) => handleForumDelete(forum.id, event)}>Delete</Button>{' '}
+              <Button variant="warning" onClick={(event) => handleForumEdit(forum.id, event)}>Edit</Button>{' '}
             </Card.Body>
           </Card>
         ))}
@@ -73,6 +79,7 @@ export default function Forums() {
     </div>
   );
 }
+
 
 
 

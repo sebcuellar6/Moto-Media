@@ -16,6 +16,7 @@ import PostForum from './components/PostForum.jsx'
 import Login from './components/LoginJWT.jsx'
 import PostMeetUps from './components/PostMeetUps.jsx'
 import MeetUpDetails from './components/MeetUpDetails.jsx'
+import UpdateForum from './components/UpdateForum.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       <Route path='#profile' element={<Profile/>} />
       <Route path='/forums' element={<Forums/>} />
       <Route path='/forum-details/:id' element={<ForumDetails/>} />
+      <Route path='/update-forum/:id' element={<UpdateForum/>} />
       <Route path='/forum-post' element={<PostForum />} />
       <Route path='/meetups' element={<MeetUps/>} />
       <Route path='/meetups/:id' element={<MeetUpDetails/>} />
