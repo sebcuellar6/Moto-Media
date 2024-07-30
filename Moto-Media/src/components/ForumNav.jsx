@@ -9,6 +9,8 @@ export default function ForumNav({ categories, onSearch }) {
     onSearch(searchQuery);
   };
 
+  const handlePostClick = () => navigate(`/forum-post`);
+
   return (
     <div className='forumNav'>
       {[false].map((expand) => (
@@ -30,6 +32,7 @@ export default function ForumNav({ categories, onSearch }) {
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#action1">Home</Nav.Link>
                   <Nav.Link href="#action2">My Posts</Nav.Link>
+                  <Nav.Link href='/forum-post'>Post +</Nav.Link>
                   <NavDropdown
                     title="Categories"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}

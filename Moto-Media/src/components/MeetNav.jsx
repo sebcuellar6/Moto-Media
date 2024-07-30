@@ -2,6 +2,9 @@ import React from 'react';
 import { Navbar, Container, Offcanvas, Nav, NavDropdown, Form, Button } from 'react-bootstrap';
 
 export default function MeetNav() {
+
+  const handlePostClick = () => navigate('/meetups-post/');
+
   return (
     <div className='forumNav'>
       {[false].map((expand) => (
@@ -23,6 +26,7 @@ export default function MeetNav() {
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#action1">Home</Nav.Link>
                   <Nav.Link href="#action2">My Events</Nav.Link>
+                  <Nav.Link href='/meetups-post/'>Post +</Nav.Link>
                 </Nav>
                 <Form className="d-flex">
                   <Form.Control

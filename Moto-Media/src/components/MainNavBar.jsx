@@ -17,13 +17,13 @@ function MainNavBar() {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand as={Link} to="/">Navbar</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className='nav-title'>Moto-Media</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav.Link as={Link} to="/forums">Forums</Nav.Link>
           <Nav.Link as={Link} to="/meetups">Meet-ups</Nav.Link>
           <Nav.Link as={Link} to="/messages">Messages</Nav.Link>
-          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+          
         </Nav>
         {!isLoading && isAuthenticated && (
           <Navbar.Text>
@@ -31,6 +31,7 @@ function MainNavBar() {
           </Navbar.Text>
         )}
       </Container>
+      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
     </Navbar>
   );
 }

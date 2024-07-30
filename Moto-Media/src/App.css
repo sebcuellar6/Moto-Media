@@ -6,6 +6,14 @@
   color: #C5CBD3;
 }
 
+#root {
+  background-color: #313E50;
+}
+
+.nav-title {
+  color: #F34213!important;
+}
+
 .home-carousel img{
   border-radius: 25px;
   padding: 20px;
@@ -20,8 +28,67 @@
   color: #C5CBD3;
 }
 
-.forum-post {
-  margin: 15px;
+.home-card {
+  background-color: #C5CBD3;
+  border: 2px solid #7B0D1E;
+}
+
+.home-header {
+  background-color: #b1a08d!important;
+  color: #F34213!important;
+}
+
+.home-body {
+  background-color: #F1DABF!important;
+}
+
+.full-width-container {
+  width: 100%;
+  padding: 0; /* Optional: remove default padding */
+  margin: 0 auto; /* Center the container if desired */
+}
+
+.full-width-container .container {
+  max-width: 100%;
+}
+
+/* App.css */
+
+.forumPage {
+  padding: 20px;
+}
+
+.post-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between cards */
+}
+
+.forum-card {
+  flex: 1 1 calc(33.333% - 20px); /* 3 cards per row with some gap */
+  max-width: calc(33.333% - 20px); /* Same as flex basis */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+@media (max-width: 768px) {
+  .forum-card {
+    flex: 1 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .forum-card {
+    flex: 1 1 100%; /* 1 card per row on very small screens */
+    max-width: 100%;
+  }
+}
+
+
+.forum-card {
+  flex: 1 1 100%; /* Make each card take up the full width of the container */
+  max-width: 100%; /* Limit the max width to 90% of the container */
+  margin: 10px;
 }
 
 .post-links {
@@ -64,3 +131,39 @@
 .meet-image {
   margin: 20px;
 }
+
+/* Meet-Up Page */
+
+.card-description {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-description.full {
+  white-space: normal;
+}
+
+.card-description-container {
+  max-height: 100px; /* Adjust based on your needs */
+  overflow: hidden;
+}
+
+.card-description-container.full {
+  max-height: none;
+}
+
+
+@media (max-width: 768px) { /* Adjust the max-width value as needed */
+  .card-description {
+    display: none;
+  }
+}
+
+/* Meet-Ups Post */
+
+.small-text {
+  font-size: 0.9rem!important; /* Adjust as needed */
+}
+

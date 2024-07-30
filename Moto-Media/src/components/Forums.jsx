@@ -62,10 +62,10 @@ export default function Forums() {
     <div className='forumPage'>
       <h1 style={{ fontSize: '40px' }}><u>Forums</u></h1>
       <ForumNav categories={categories} onSearch={handleSearch} />
-      <Button variant="primary" onClick={handlePostClick}>Post +</Button>{' '}
-      <Container className='post-cards'>
+      
+      <Container className='full-width-container'>
         {filteredForums.map((forum) => (
-          <Card key={forum.id} onClick={() => handleForumClick(forum.id)}>
+          <Card className='forum-card' key={forum.id} onClick={() => handleForumClick(forum.id)}>
             <Card.Header as="h5">{forum.username}</Card.Header>
             <Card.Body>
               <Card.Title>{forum.title}</Card.Title>
@@ -79,6 +79,7 @@ export default function Forums() {
     </div>
   );
 }
+
 
 
 

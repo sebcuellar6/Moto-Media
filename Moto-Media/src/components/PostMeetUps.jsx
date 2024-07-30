@@ -22,6 +22,7 @@ export default function PostMeetUps() {
   const [tags, setTags] = useState('');
   const [category, setCategory] = useState('');
   const [profile_id, setProfile_id] = useState('');
+  const [profiles, setProfiles] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const handlePost = async (e) => {
@@ -62,7 +63,9 @@ export default function PostMeetUps() {
     const getData = async () => {
       try {
         const categoryResponse = await axios.get('http://localhost:8000/categories/');
+        const profileResponse = await axios.get('http://localhost:8000/profiles/');
         setCategories(categoryResponse.data);
+        setProfiles(profileResponse.data);
       } catch (error) {
         console.log(error);
       }
@@ -77,38 +80,45 @@ export default function PostMeetUps() {
 
   return (
     <div className='heroPage'>
-      <h1 style={{ fontSize: '40px' }}><u>Post Meet Up</u></h1>
+      <h1 className="mb-4" style={{ fontSize: '40px' }}><u>Post Meet Up</u></h1>
       <MeetNav />
       <Container>
         <Form onSubmit={handlePost}>
-          {/* Your existing form fields */}
-          <Row>
-            <Form.Label column lg={2}>
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm={2} className="small-text">
               Title
             </Form.Label>
-            <Col>
+            <Col sm={10}>
               <Form.Control type="text" placeholder="Enter Title" value={name} onChange={(e) => setName(e.target.value)} required />
             </Col>
-          </Row>
-          <Form.Select className='post-category' aria-label="Default select example" value={category} onChange={(e) => setCategory(e.target.value)} required>
-            <option>Select a Category</option>
-            {categories.map((category) => (
-              <option value={category.id} key={category.id}>{category.name}</option>
-            ))}
-          </Form.Select>
-          <Form.Group className="mb-3 post-body" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Description</Form.Label>
+          </Form.Group>
+          
+          <Form.Group className="mb-3">
+            <Form.Label className="small-text">Category</Form.Label>
+            <Form.Select aria-label="Default select example" value={category} onChange={(e) => setCategory(e.target.value)} required>
+              <option>Select a Category</option>
+              {categories.map((category) => (
+                <option value={category.id} key={category.id}>{category.name}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label className="small-text">Description</Form.Label>
             <Form.Control as="textarea" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} required />
           </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3 post-images">
-            <Form.Label>Add Main Image</Form.Label>
+          
+          <Form.Group className="mb-3">
+            <Form.Label className="small-text">Add Main Image</Form.Label>
             <Form.Control type="file" onChange={(e) => setMainImage(e.target.files[0])} />
           </Form.Group>
-          <Form.Group controlId="formFileMultiple" className="mb-3 post-images">
-            <Form.Label>Add Images</Form.Label>
+
+          <Form.Group className="mb-3">
+            <Form.Label className="small-text">Add Images</Form.Label>
             <Form.Control type="file" multiple onChange={(e) => setImages(e.target.files)} />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="inviteOnly">
+
+          <Form.Group className="mb-3">
             <Form.Check 
               type="checkbox" 
               label="Invite Only" 
@@ -116,47 +126,56 @@ export default function PostMeetUps() {
               onChange={(e) => setInvite(e.target.checked)} 
             />
           </Form.Group>
-          <Row className='post-links'>
-            <Form.Label column lg={2}>
+
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm={2} className="small-text">
               Skill Level
             </Form.Label>
-            <Col>
+            <Col sm={10}>
               <Form.Control type="text" placeholder="Enter Skill Level" value={skill} onChange={(e) => setSkill(e.target.value)} />
             </Col>
-          </Row>
-          <Row className='post-tags'>
-            <Form.Label column lg={2}>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm={2} className="small-text">
               Location
             </Form.Label>
-            <Col>
+            <Col sm={10}>
               <Form.Control type="text" placeholder="Enter Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
             </Col>
-          </Row>
-          <Row>
-            <Form.Label column lg={2}>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm={2} className="small-text">
               Type
             </Form.Label>
-            <Col>
+            <Col sm={10}>
               <Form.Control type="text" placeholder="Enter Type" value={type} onChange={(e) => setType(e.target.value)} />
             </Col>
-          </Row>
-          <Row>
-            <Form.Label column lg={2}>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm={2} className="small-text">
               Tags
             </Form.Label>
-            <Col>
+            <Col sm={10}>
               <Form.Control type="text" placeholder="Enter Tags" value={tags} onChange={(e) => setTags(e.target.value)} />
             </Col>
-          </Row>
-          <Row>
-            <Form.Label column lg={2}>
-              Profile
-            </Form.Label>
-            <Col>
-              <Form.Control type="text" placeholder="Enter ID" value={profile_id} onChange={(e) => setProfile_id(e.target.value)} />
-            </Col>
-          </Row>
-          <Button as="input" type="submit" value="Submit" />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label className="small-text">Profile</Form.Label>
+            <Form.Select aria-label="Select a Profile" value={profile_id} onChange={(e) => setProfile_id(e.target.value)} required>
+              <option>Select a Profile</option>
+              {profiles.map((profile) => (
+                <option value={profile.id} key={profile.id}>
+                  {profile.username} {/* Display profile name */}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+
+          <Button type="submit" variant="primary">Submit</Button>
         </Form>
       </Container>
 
@@ -175,5 +194,6 @@ export default function PostMeetUps() {
     </div>
   );
 }
+
 
 

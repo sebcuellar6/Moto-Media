@@ -62,7 +62,7 @@ export default function Home() {
           </Carousel.Item>
         ))}
       </Carousel>
-      <Container className='home-card' style={{ paddingTop: '30px' }}>
+      <Container className='home-container' style={{ paddingTop: '30px' }}>
         <Row>
           <h1 style={{ textAlign: 'left', paddingBottom: '20px' }}>Latest posts...</h1>
         </Row>
