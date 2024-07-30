@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Container, Offcanvas, Nav, NavDropdown, Form, Button } from 'react-bootstrap';
 
-export default function ForumNav({ categories }) {
+export default function ForumNav({ categories, onSearch }) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    onSearch(searchQuery);
+  };
+
   return (
     <div className='forumNav'>
       {[false].map((expand) => (
@@ -35,14 +42,16 @@ export default function ForumNav({ categories }) {
                     <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
-                <Form className="d-flex">
+                <Form className="d-flex" onSubmit={handleSearch}>
                   <Form.Control
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <Button variant="outline-success">Search</Button>
+                  <Button variant="outline-success" type="submit">Search</Button>
                 </Form>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
@@ -52,6 +61,7 @@ export default function ForumNav({ categories }) {
     </div>
   );
 }
+
 
 
 

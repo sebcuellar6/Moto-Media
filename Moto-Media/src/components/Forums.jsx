@@ -6,9 +6,11 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import ForumNav from './ForumNav';
+import levenshtein from 'js-levenshtein';
 
 export default function Forums() {
   const [forums, setForums] = useState([]);
+  const [filteredForums, setFilteredForums] = useState([]);
   const [categories, setCategories] = useState([]);
   let navigate = useNavigate();
 
@@ -18,6 +20,7 @@ export default function Forums() {
         const response = await axios.get('http://localhost:8000/forumposts/');
         const categoryResponse = await axios.get('http://localhost:8000/categories/');
         setForums(response.data);
+        setFilteredForums(response.data); // Initialize filteredForums with all forums
         setCategories(categoryResponse.data);
       } catch (error) {
         console.log(error);
@@ -26,21 +29,43 @@ export default function Forums() {
     getData();
   }, []);
 
-  const handlePostClick = () => navigate(`/forum-post`)
+  const handlePostClick = () => navigate(`/forum-post`);
   const handleForumClick = (id) => navigate(`/forum-details/${id}`);
+  
+  const handleForumDelete = async (id, event) => {
+    event.stopPropagation(); // Prevents the Card onClick from firing
+    try {
+      await axios.delete(`http://localhost:8000/forumposts/${id}`);
+      setForums(forums.filter((forum) => forum.id !== id));
+      setFilteredForums(filteredForums.filter((forum) => forum.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSearch = (query) => {
+    const lowercasedQuery = query.toLowerCase();
+    const filtered = forums.filter((forum) => {
+      const titleDistance = levenshtein(forum.title.toLowerCase(), lowercasedQuery);
+      const bodyDistance = levenshtein(forum.body.toLowerCase(), lowercasedQuery);
+      return titleDistance < 10 || bodyDistance < 10; // You can adjust the threshold as needed
+    });
+    setFilteredForums(filtered);
+  };
 
   return (
     <div className='forumPage'>
       <h1 style={{ fontSize: '40px' }}><u>Forums</u></h1>
-      <ForumNav categories={categories} />
+      <ForumNav categories={categories} onSearch={handleSearch} />
       <Button variant="primary" onClick={handlePostClick}>Post +</Button>{' '}
       <Container className='post-cards'>
-        {forums.map((forum) => (
+        {filteredForums.map((forum) => (
           <Card key={forum.id} onClick={() => handleForumClick(forum.id)}>
             <Card.Header as="h5">{forum.username}</Card.Header>
             <Card.Body>
               <Card.Title>{forum.title}</Card.Title>
               <Card.Text>{forum.body}</Card.Text>
+              <Button variant="danger" onClick={(event) => handleForumDelete(forum.id, event)}>Delete</Button>{' '}
             </Card.Body>
           </Card>
         ))}
@@ -48,4 +73,6 @@ export default function Forums() {
     </div>
   );
 }
+
+
 
